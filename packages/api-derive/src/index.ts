@@ -58,12 +58,12 @@ function injectFunctions (api: ApiInterface$Rx, derive: Derive, functions: Deriv
   return derive;
 }
 
-export default function decorateDerive (api: ApiInterface$Rx, custom: DeriveCustom = {}, MdVersion: any): Derive {
+export default function decorateDerive (api: ApiInterface$Rx, custom: DeriveCustom = {}, metadataVersion: number): Derive {
   const derive = {} as Derive;
 
   injectFunctions(api, derive, functions);
-  if (MdVersion === 3) {
-    console.log('Version three overwrites');
+  if ([1,2,3].includes(metadataVersion)) {
+    console.log('Overwrites for v3 and earlier');
     injectFunctions(api, derive, v3);
   }
   injectFunctions(api, derive, custom);

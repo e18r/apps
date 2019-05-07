@@ -28,7 +28,8 @@ type Props = AppProps & ApiProps & I18nProps & {
   balances?: DerivedBalancesMap,
   session_validators?: Array<AccountId>,
   staking_controllers?: [Array<AccountId>, Array<Option<AccountId>>],
-  staking_recentlyOffline?: RecentlyOffline
+  staking_recentlyOffline?: RecentlyOffline,
+  staking_validators?: any
 };
 
 type State = {
@@ -44,7 +45,7 @@ class App extends React.PureComponent<Props, State> {
 
   constructor (props: Props) {
     super(props);
-
+    console.log('staking_validators', this.props.staking_validators)
     const { t } = props;
 
     this.state = {
@@ -142,7 +143,8 @@ export default withMulti(
   withCalls<Props>(
     'derive.staking.controllers',
     'query.session.validators',
-    'query.staking.recentlyOffline'
+    'query.staking.recentlyOffline',
+    'query.staking.validators'
   ),
   withObservable(accountObservable.subject, { propName: 'allAccounts' })
 );

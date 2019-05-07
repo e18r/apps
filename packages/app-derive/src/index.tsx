@@ -15,14 +15,14 @@ const DAVE = '5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy';
 const DAVEindex = 'F7XB';
 
 type Props = AppProps & I18nProps & {
-  staking_intentionsBalances: any,
-  staking_controllers: any
+  session_validators: any,
+  staking_validators: any
 };
 
 class App extends React.PureComponent<Props> {
   render () {
-    console.log('this.props.staking_intentionsBalances', this.props.staking_intentionsBalances);
-    console.log('this.props.staking_controllers', this.props.staking_controllers);
+    console.log('this.props.session_validators', this.props.session_validators);
+    console.log('this.props.staking_validators', this.props.staking_validators);
     return (
       <main>
         test
@@ -33,6 +33,6 @@ class App extends React.PureComponent<Props> {
 }
 
 export default withCalls<Props>(
-  'derive.staking.intentionsBalances',
-  ['derive.staking.controllers', { params: ['5GNJqTPyNqANBkUVMN1LPPrxXnFouWXoe2wNSmmEoLctxiZY'] }]
+  'query.staking.validators',
+  'query.session.validators'
 )(App);

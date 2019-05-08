@@ -22,11 +22,10 @@ function allBonds (api: ApiInterface$Rx, stashIds: Array<AccountId>) {
  * @description From the list of stash accounts, retrieve the list of controllers
  */
 export function controllers (api: ApiInterface$Rx) {
-  console.log('V4 CONTROLLER')
   return (): Observable<[Array<AccountId>, Array<Option<AccountId>>]> =>
-    (api.query.session.validators() as any as Observable<Array<AccountId>>)
+    (api.query.staking.validators() as any as Observable<[Array<AccountId>, any]>)
       .pipe(
-        switchMap((stashIds) =>
+        switchMap(([stashIds]) =>
           combineLatest([
             of(stashIds),
             allBonds(api, stashIds)

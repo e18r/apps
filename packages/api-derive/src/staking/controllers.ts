@@ -12,10 +12,8 @@ import { drr } from '../util/drr';
 function allBonds (api: ApiInterface$Rx, stashIds: Array<AccountId>) {
   return combineLatest(
     // FIXME Convert to multi
-    stashIds.map((id) =>{
-      console.log('ID', id.toString());
-      return (api.query.staking.bonded(id) as Observable<Option<AccountId>>)
-    }
+    stashIds.map((id) =>
+      (api.query.staking.bonded(id) as Observable<Option<AccountId>>)
     )
   );
 }
